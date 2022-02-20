@@ -1,0 +1,2 @@
+# Flixbot
+Discord movie bot
