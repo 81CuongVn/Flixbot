@@ -9,5 +9,5 @@ A discord bot for movies, built on Node.js
 * Built on NodeJS.
 
 ## Commands
-<mark>Marked text</mark>
+<span style="background-color: #FFFF00">Marked text</span>
 
