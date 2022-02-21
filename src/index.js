@@ -41,7 +41,7 @@ client.on('messageCreate', function(message) {
                 console.log(error);
                 message.reply("Can't find that movie.")
             })
-    } else if (command === 'review'){
+    } else if (command === 'rating'){
         // get random movie info
         axios.get('http://www.omdbapi.com?t='+args.join("+")+'&apikey='+process.env.API_KEY)
             .then((response) => {
