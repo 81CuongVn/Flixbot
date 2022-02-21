@@ -10,5 +10,5 @@ A discord bot for movies, built on Node.js
 
 ## Commands
 
-**!info [your-movie]**: get relevant information on a movie, such as plot, runtime, genres, actors, and more.
+* **!info** *movie*: get relevant information on a movie, such as plot, runtime, genres, actors, and more.
 
