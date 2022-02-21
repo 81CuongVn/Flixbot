@@ -1,2 +1,2 @@
 # Flixbot
-A discord for movies, built on Node.js
+A discord bot for movies, built on Node.js
