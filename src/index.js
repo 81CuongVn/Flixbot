@@ -68,10 +68,10 @@ client.on('messageCreate', function(message) {
             let id = response.data.results[0].id
             axios.get('https://api.themoviedb.org/3/movie/'+id+'/recommendations?api_key='+process.env.TMDB_KEY+'&language=en-US&page=1')
                 .then((res) => {
-                    // gets the top 3 results, and chooses one
-                    let resultRank = Math.floor((Math.random()*3));
-                    message.reply('A similar movie is: ' + res.data.results[resultRank].original_title + '.\n' +
-                    'Overview: ' + res.data.results[resultRank].overview)
+                    // gets the top 5 results
+                    message.reply('Top 5 similar movies are: ' + res.data.results[0].original_title + ', ' +
+                    res.data.results[1].original_title + ', ' + res.data.results[2].original_title + ', ' +
+                    res.data.results[3].original_title + ', ' + res.data.results[4].original_title)
                 })
                 .catch((error) => {
                     console.log(error)
