@@ -27,7 +27,7 @@ client.on('messageCreate', function(message) {
         message.reply(`Active with a latency of ${timeTaken}ms`);
     } else if (command === 'info'){
         // get movie info
-        axios.get('http://www.omdbapi.com?t='+args.join("-")+'&apikey='+process.env.API_KEY)
+        axios.get('http://www.omdbapi.com?t='+args.join("+")+'&apikey='+process.env.API_KEY)
             .then((response) => {
                 message.reply('Plot: '+response.data.Plot + '\n' +
                 'Released in ' + response.data.Released + ' with a runtime of ' + response.data.Runtime + '.\n' +
@@ -43,7 +43,7 @@ client.on('messageCreate', function(message) {
             })
     } else if (command === 'review'){
         // get random movie info
-        axios.get('http://www.omdbapi.com?t='+args.join("-")+'&apikey='+process.env.API_KEY)
+        axios.get('http://www.omdbapi.com?t='+args.join("+")+'&apikey='+process.env.API_KEY)
             .then((response) => {
                 let consenus = '';
                 if (response.data.imdbRating < 5){
