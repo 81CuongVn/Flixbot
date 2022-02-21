@@ -61,8 +61,25 @@ client.on('messageCreate', function(message) {
                 console.log(error);
                 message.reply("Can't find that movie.")
             })
-    } else if (command === 'trailer'){
-
+    } else if (command === 'somethinglike'){
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key='+process.env.TMDB_KEY+'&query='+args.join("+"))
+        .then((response) => {
+            console.log(response.data.results[0].id)
+            let id = response.data.results[0].id
+            axios.get('https://api.themoviedb.org/3/movie/'+id+'/recommendations?api_key='+process.env.TMDB_KEY+'&language=en-US&page=1')
+                .then((res) => {
+                    // gets the top 3 results, and chooses one
+                    let resultRank = Math.floor((Math.random()*2)+1) - 1; 
+                    message.reply('A similar movie is: ' + res.data.results[resultRank].original_title + '.\n' +
+                    'Overview: ' + res.data.results[resultRank].overview)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
     
     if (command === 'test'){
