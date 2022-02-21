@@ -2,6 +2,8 @@
 
 A discord bot for movies, built on Node.js
 
+<img src="/logo/Flixbot-4.png" width="150" height="150"/>
+
 # Introduction
 
 * Flixbot is a discord bot that allows for users to conduct different types of queries on movies.
@@ -22,8 +24,3 @@ A discord bot for movies, built on Node.js
 * [NodeJS](https://nodejs.org/en/)
 * [Axios](https://axios-http.com/docs/intro)
 * [Discord.js](https://discord.js.org/#/)
-
-<img src="/logo/Flixbot-4.png" width="150" height="150"/>
-
-
-
