@@ -9,5 +9,6 @@ A discord bot for movies, built on Node.js
 * Built on NodeJS.
 
 ## Commands
-<span style="background-color: #FFFF00">Marked text</span>
+
+**!info [your-movie]**: get relevant information on a movie, such as plot, runtime, genres, actors, and more.
 
