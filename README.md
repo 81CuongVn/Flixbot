@@ -15,7 +15,15 @@ A discord bot for movies, built on Node.js
 * **!somethinglike** *movie*: recommends one of the top 3 movies similar to the queried movie, and also gives an overview on it.
 * **!trending**: gets the top 5 trending movies
 * **!watch** *movie*: creates a link for where to watch the queried movie. (coming soon)
-* **!ping**: checks if Flixbot is active and get's the latency at which it's operating.
+* **!ping**: checks if Flixbot is active and gets the latency at which it's operating.
+
+# Dependencies
+
+* [NodeJS](https://nodejs.org/en/)
+* [Axios](https://axios-http.com/docs/intro)
+* [Discord.js](https://discord.js.org/#/)
+
+<img src="(/logo/Flixbot-4.png)" style="width: 150px; height: 150px;"/>
 
 
 
