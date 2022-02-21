@@ -23,7 +23,7 @@ A discord bot for movies, built on Node.js
 * [Axios](https://axios-http.com/docs/intro)
 * [Discord.js](https://discord.js.org/#/)
 
-<img src="(/logo/Flixbot-4.png)" style="width: 150px; height: 150px;"/>
+<img src="(/logo/Flixbot-4.png)" width="150" height="150"/>
 
 
 
