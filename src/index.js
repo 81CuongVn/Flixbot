@@ -86,13 +86,23 @@ client.on('messageCreate', function(message) {
         .catch((error) => {
             console.log(error);
         })
-    }
-    
-    if (command === 'test'){
-        // get similar movie
-        message.reply('input was: ' + args.join("+"));
-
-    };
+    } else if (command === 'trending'){
+        axios.get('https://api.themoviedb.org/3/movie/popular?api_key='+process.env.TMDB_KEY+'&language=en-US&page=1')
+            .then((response) => {
+                message.reply('These movies seem to trending: \n'+
+                '1. '+response.data.results[0].original_title+'\n' +
+                '2. '+response.data.results[1].original_title+'\n' +
+                '3. '+response.data.results[2].original_title+'\n' +
+                '4. '+response.data.results[3].original_title+'\n' +
+                '5. '+response.data.results[4].original_title+'\n');
+            })
+            .catch((error) => {
+                console.log(error);
+                message.reply("Can't find that movie.");
+            })
+    } else if (command === 'watch'){
+        // method to open a watch link to whatever movie is queried
+    } 
 
 });
 
