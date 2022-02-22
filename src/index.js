@@ -26,6 +26,7 @@ client.on('messageCreate', function(message) {
         message.reply(`Active with a latency of ${timeTaken}ms`);
     } else if (command === 'kick'){
         if (!message.member.hasPermission('KICK_MEMBERS')){
+          
             return message.reply('You need permission in order to kick.')
         } else if (args.length === 0){
             return message.reply('Please provide a member to kick.')
@@ -34,7 +35,7 @@ client.on('messageCreate', function(message) {
         if (member) {
             member
                 .kick()
-                .then((member) => message.channel.send(`${member} was kicked.`))
+                .then((mem) => message.channel.send(`${member} was kicked.`))
                 .catch((error) => {
                     console.log(error);
                     message.channel.send(`Cannot kick ${member}`);
@@ -60,7 +61,28 @@ client.on('messageCreate', function(message) {
         const announcement = args.join(' ');
         console.log(announcement);
         message.channel.send('@everyone ' + announcement);
-    }else if (command === 'info'){
+
+    } else if (command === 'roleadd') {
+        const role = message.guild.roles.cache.get(args[0]);
+        const member = message.guild.members.cache.get(args[1]);
+        member.roles
+            .add(role)
+            .then((mem) => message.reply(`${role} has been added to ${member}`))
+            .catch((error) => {
+                console.log(error)
+                message.reply(`Unable to add ${role} to ${member}.`)
+            })
+    } else if (command === 'roleremove') {
+        const role = message.guild.roles.cache.get(args[0]);
+        const member = message.guild.members.cache.get(args[1]);
+        member.roles
+            .remove(role)
+            .then((mem) => message.reply(`${role} has been removed from ${member}`))
+            .catch((error) =>{
+                console.log(error)
+                essage.reply(`Unable to remove ${role} from ${member}.`)
+            })
+    } else if (command === 'info'){
         // get movie info
         axios.get('http://www.omdbapi.com?t='+args.join("+")+'&apikey='+process.env.API_KEY)
             .then((response) => {
