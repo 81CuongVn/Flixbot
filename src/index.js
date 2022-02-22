@@ -22,10 +22,45 @@ client.on('messageCreate', function(message) {
     const command = args.shift().toLowerCase();
 
     if (command === 'ping'){
-        // active 
         const timeTaken = Date.now() - message.createdTimestamp;
         message.reply(`Active with a latency of ${timeTaken}ms`);
-    } else if (command === 'info'){
+    } else if (command === 'kick'){
+        if (!message.member.hasPermission('KICK_MEMBERS')){
+            return message.reply('You need permission in order to kick.')
+        } else if (args.length === 0){
+            return message.reply('Please provide a member to kick.')
+        } 
+        const member = message.guild.members.cache.get(args[0]);
+        if (member) {
+            member
+                .kick()
+                .then((member) => message.channel.send(`${member} was kicked.`))
+                .catch((error) => {
+                    console.log(error);
+                    message.channel.send(`Cannot kick ${member}`);
+                })
+        } else {
+            message.channel.send('User was not found');
+        }
+    } else if (command === 'ban'){
+        if (!message.member.hasPermission('BAN_MEMBERS')){
+            return message.reply('You need permission in order to ban.')
+        } else if (args.length === 0){
+            return message.reply('Please provide a member to ban.')
+        }
+        try {
+            const user = await message.guild.members.ban(args[0]);
+            message.channel.send(`${user} has been banned.`);
+        } catch (error) {
+            console.log(error);
+            message.channel.send('Cannot kick that user.');
+        }  
+    } else if (command === 'announce'){
+        console.log(args);
+        const announcement = args.join(' ');
+        console.log(announcement);
+        message.channel.send('@everyone ' + announcement);
+    }else if (command === 'info'){
         // get movie info
         axios.get('http://www.omdbapi.com?t='+args.join("+")+'&apikey='+process.env.API_KEY)
             .then((response) => {
@@ -39,7 +74,7 @@ client.on('messageCreate', function(message) {
             })
             .catch((error) => {
                 console.log(error);
-                message.reply("Can't find that movie.")
+                message.reply("Can't find that movie.");
             })
     } else if (command === 'rating'){
         // get random movie info
@@ -55,23 +90,23 @@ client.on('messageCreate', function(message) {
                 } else consenus += 'great';
                 message.reply('Rotten Tomatoes Rating: ' + response.data.Ratings[1].Value + '\n' +
                 'Metacritic Rating: ' + response.data.Ratings[2].Value + '\n' +
-                'Looks to be ' + consenus + '.')
+                'Looks to be ' + consenus + '.');
             })
             .catch((error) => {
                 console.log(error);
-                message.reply("Can't find that movie.")
+                message.reply("Can't find that movie.");
             })
     } else if (command === 'somethinglike'){
         axios.get('https://api.themoviedb.org/3/search/movie?api_key='+process.env.TMDB_KEY+'&query='+args.join("+"))
         .then((response) => {
-            console.log(response.data.results[0].id)
-            let id = response.data.results[0].id
+            console.log(response.data.results[0].id);
+            let id = response.data.results[0].id;
             axios.get('https://api.themoviedb.org/3/movie/'+id+'/recommendations?api_key='+process.env.TMDB_KEY+'&language=en-US&page=1')
                 .then((res) => {
                     // gets the top 3 results, and chooses one
                     let resultRank = Math.floor((Math.random()*3));
                     message.reply('A similar movie is: ' + res.data.results[resultRank].original_title + '.\n' +
-                    'Overview: ' + res.data.results[resultRank].overview)
+                    'Overview: ' + res.data.results[resultRank].overview);
                 })
                 /**
                  *  // gets the top 5 results
@@ -80,7 +115,8 @@ client.on('messageCreate', function(message) {
                     res.data.results[3].original_title + ', ' + res.data.results[4].original_title)
                  */
                 .catch((error) => {
-                    console.log(error)
+                    console.log(error);
+                    message.reply("Can't find that movie.");
                 })
         })
         .catch((error) => {
@@ -102,8 +138,7 @@ client.on('messageCreate', function(message) {
             })
     } else if (command === 'watch'){
         // method to open a watch link to whatever movie is queried
-    } 
-
+    }    
 });
 
 client.login(process.env.DISCORD_TOKEN)
