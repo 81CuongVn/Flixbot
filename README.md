@@ -6,7 +6,7 @@ A discord bot for movies, built on Node.js
 
 # Introduction
 
-* Flixbot is a discord bot that allows for users to manage their servers as well as to allows users to conduct different types of queries on movies.
+* Flixbot is a discord bot that allows for users to manage their servers as well as allowing the ability to conduct different types of queries on movies.
 * The bot utilizes the [OMDB](http://www.omdbapi.com) and [TMDB](https://www.themoviedb.org) APIs to obtain accurate and up to date data on movies.
 * Built on NodeJS.
 
